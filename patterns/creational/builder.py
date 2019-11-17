@@ -1,6 +1,3 @@
-#!/usr/bin/python
-# -*- coding : utf-8 -*-
-
 """
 *What is this pattern about?
 It decouples the creation of a complex object and its representation,
@@ -36,7 +33,7 @@ Decouples the creation of a complex object and its representation.
 
 
 # Abstract Building
-class Building(object):
+class Building:
     def __init__(self):
         self.build_floor()
         self.build_size()
@@ -74,7 +71,7 @@ class Flat(Building):
 # a concrete class does not have a useful constructor)
 
 
-class ComplexBuilding(object):
+class ComplexBuilding:
     def __repr__(self):
         return 'Floor: {0.floor} | Size: {0.size}'.format(self)
 
@@ -94,18 +91,23 @@ def construct_building(cls):
     return building
 
 
-# Client
-if __name__ == "__main__":
-    house = House()
-    print(house)
-    flat = Flat()
-    print(flat)
+def main():
+    """
+    >>> house = House()
+    >>> house
+    Floor: One | Size: Big
+
+    >>> flat = Flat()
+    >>> flat
+    Floor: More than One | Size: Small
 
     # Using an external constructor function:
-    complex_house = construct_building(ComplexHouse)
-    print(complex_house)
+    >>> complex_house = construct_building(ComplexHouse)
+    >>> complex_house
+    Floor: One | Size: Big and fancy
+    """
 
-### OUTPUT ###
-# Floor: One | Size: Big
-# Floor: More than One | Size: Small
-# Floor: One | Size: Big and fancy
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()

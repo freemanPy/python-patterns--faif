@@ -1,13 +1,10 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
 *TL;DR
 Separates presentation, application processing, and data management functions.
 """
 
 
-class Data(object):
+class Data:
     """ Data Store Class """
 
     products = {
@@ -21,7 +18,7 @@ class Data(object):
         return {'products': self.products}
 
 
-class BusinessLogic(object):
+class BusinessLogic:
     """ Business logic holding data store instances """
 
     data = Data()
@@ -33,7 +30,7 @@ class BusinessLogic(object):
         return self.data['products'].get(product, None)
 
 
-class Ui(object):
+class Ui:
     """ UI interaction class """
 
     def __init__(self):

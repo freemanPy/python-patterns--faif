@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
 *What is this pattern about?
 The composite pattern describes a group of objects that is treated the

@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
 http://peter-hoffmann.com/2010/extrinsic-visitor-pattern-python-inheritance.html
 
@@ -19,7 +16,7 @@ which is then being used e.g. in tools like `pyflakes`.
 """
 
 
-class Node(object):
+class Node:
     pass
 
 
@@ -35,7 +32,7 @@ class C(A, B):
     pass
 
 
-class Visitor(object):
+class Visitor:
     def visit(self, node, *args, **kwargs):
         meth = None
         for cls in node.__class__.__mro__:

@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
 Reference: https://en.wikipedia.org/wiki/Delegation_pattern
 Author: https://github.com/IuryAlves
@@ -10,7 +7,7 @@ Allows object composition to achieve the same code reuse as inheritance.
 """
 
 
-class Delegator(object):
+class Delegator:
     """
     >>> delegator = Delegator(Delegate())
     >>> delegator.p1
@@ -41,7 +38,7 @@ class Delegator(object):
         return wrapper
 
 
-class Delegate(object):
+class Delegate:
     def __init__(self):
         self.p1 = 123
 

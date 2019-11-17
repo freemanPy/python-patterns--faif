@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
 @author: Eugene Duboviy <eugene.dubovoy@gmail.com> | github.com/duboviy
 
@@ -16,7 +13,7 @@ import abc
 import random
 
 
-class Blackboard(object):
+class Blackboard:
     def __init__(self):
         self.experts = []
         self.common_state = {
@@ -30,7 +27,7 @@ class Blackboard(object):
         self.experts.append(expert)
 
 
-class Controller(object):
+class Controller:
     def __init__(self, blackboard):
         self.blackboard = blackboard
 
@@ -93,30 +90,37 @@ class Professor(AbstractExpert):
         self.blackboard.common_state['progress'] += random.randint(10, 100)
 
 
+def main():
+    """
+    >>> blackboard = Blackboard()
+    >>> blackboard.add_expert(Student(blackboard))
+    >>> blackboard.add_expert(Scientist(blackboard))
+    >>> blackboard.add_expert(Professor(blackboard))
+
+    >>> c = Controller(blackboard)
+    >>> contributions = c.run_loop()
+
+    >>> from pprint import pprint
+    >>> pprint(contributions)
+    ['Student',
+     'Student',
+     'Student',
+     'Student',
+     'Scientist',
+     'Student',
+     'Student',
+     'Student',
+     'Scientist',
+     'Student',
+     'Scientist',
+     'Student',
+     'Student',
+     'Scientist',
+     'Professor']
+    """
+
+
 if __name__ == '__main__':
-    blackboard = Blackboard()
-
-    blackboard.add_expert(Student(blackboard))
-    blackboard.add_expert(Scientist(blackboard))
-    blackboard.add_expert(Professor(blackboard))
-
-    c = Controller(blackboard)
-    contributions = c.run_loop()
-
-    from pprint import pprint
-
-    pprint(contributions)
-
-### OUTPUT ###
-# ['Student',
-#  'Student',
-#  'Scientist',
-#  'Student',
-#  'Scientist',
-#  'Student',
-#  'Scientist',
-#  'Student',
-#  'Scientist',
-#  'Student',
-#  'Scientist',
-#  'Professor']
+    random.seed(1234)  # for deterministic doctest outputs
+    import doctest
+    doctest.testmod()

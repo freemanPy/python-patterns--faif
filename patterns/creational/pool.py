@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
 *What is this pattern about?
 This pattern is used when creating an object is costly (and they are
@@ -18,7 +15,7 @@ populated with strings.
 As we can see, the first string object put in "yam" is USED by the
 with statement. But because it is released back into the pool
 afterwards it is reused by the explicit call to sample_queue.get().
-Same thing happens with "sam", when the ObjectPool created insided the
+Same thing happens with "sam", when the ObjectPool created inside the
 function is deleted (by the GC) and the object is returned.
 
 *Where is the pattern used practically?
@@ -32,7 +29,7 @@ Stores a set of initialized objects kept ready to use.
 """
 
 
-class ObjectPool(object):
+class ObjectPool:
     def __init__(self, queue, auto_get=False):
         self._queue = queue
         self.item = self._queue.get() if auto_get else None
@@ -54,10 +51,7 @@ class ObjectPool(object):
 
 
 def main():
-    try:
-        import queue
-    except ImportError:  # python 2.x compatibility
-        import Queue as queue
+    import queue
 
     def test_object(queue):
         pool = ObjectPool(queue, True)

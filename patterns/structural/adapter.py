@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
 *What is this pattern about?
 The Adapter pattern provides a different interface for a class. We can
@@ -32,7 +29,7 @@ Allows the interface of an existing class to be used as another interface.
 """
 
 
-class Dog(object):
+class Dog:
     def __init__(self):
         self.name = "Dog"
 
@@ -40,7 +37,7 @@ class Dog(object):
         return "woof!"
 
 
-class Cat(object):
+class Cat:
     def __init__(self):
         self.name = "Cat"
 
@@ -48,7 +45,7 @@ class Cat(object):
         return "meow!"
 
 
-class Human(object):
+class Human:
     def __init__(self):
         self.name = "Human"
 
@@ -56,7 +53,7 @@ class Human(object):
         return "'hello'"
 
 
-class Car(object):
+class Car:
     def __init__(self):
         self.name = "Car"
 
@@ -64,7 +61,7 @@ class Car(object):
         return "vroom{0}".format("!" * octane_level)
 
 
-class Adapter(object):
+class Adapter:
     """
     Adapts an object by replacing methods.
     Usage:

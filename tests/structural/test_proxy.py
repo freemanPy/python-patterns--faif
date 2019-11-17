@@ -1,14 +1,9 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 import sys
 from time import time
 import unittest
-from patterns.structural.proxy import Proxy, NoTalkProxy
+from io import StringIO
 
-if sys.version_info[0] == 2:
-    from StringIO import StringIO
-else:
-    from io import StringIO
+from patterns.structural.proxy import Proxy, NoTalkProxy
 
 
 class ProxyTest(unittest.TestCase):

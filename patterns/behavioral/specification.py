@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
 @author: Gordeev Andrey <gordeev.and.and@gmail.com>
 
@@ -11,7 +8,7 @@ Provides recombination business logic by chaining together using boolean logic.
 from abc import abstractmethod
 
 
-class Specification(object):
+class Specification:
     def and_specification(self, candidate):
         raise NotImplementedError()
 
@@ -75,7 +72,7 @@ class NotSpecification(CompositeSpecification):
         return bool(not self._wrapped.is_satisfied_by(candidate))
 
 
-class User(object):
+class User:
     def __init__(self, super_user=False):
         self.super_user = super_user
 
@@ -91,25 +88,23 @@ class SuperUserSpecification(CompositeSpecification):
 
 
 def main():
-    print('Specification')
-    andrey = User()
-    ivan = User(super_user=True)
-    vasiliy = 'not User instance'
+    """
+    >>> andrey = User()
+    >>> ivan = User(super_user=True)
+    >>> vasiliy = 'not User instance'
 
-    root_specification = UserSpecification().and_specification(SuperUserSpecification())
+    >>> root_specification = UserSpecification().and_specification(SuperUserSpecification())
 
-    print(root_specification.is_satisfied_by(andrey))
-    print(root_specification.is_satisfied_by(ivan))
-    print(root_specification.is_satisfied_by(vasiliy))
+    # Is specification satisfied by <name>
+    >>> root_specification.is_satisfied_by(andrey), 'andrey'
+    (False, 'andrey')
+    >>> root_specification.is_satisfied_by(ivan), 'ivan'
+    (True, 'ivan')
+    >>> root_specification.is_satisfied_by(vasiliy), 'vasiliy'
+    (False, 'vasiliy')
+    """
 
 
 if __name__ == '__main__':
-    main()
-
-
-OUTPUT = """
-Specification
-False
-True
-False
-"""
+    import doctest
+    doctest.testmod()
