@@ -5,8 +5,8 @@ http://code.activestate.com/recipes/413838-memento-closure/
 Provides the ability to restore an object to its previous state.
 """
 
-from copy import copy
-from copy import deepcopy
+from typing import Callable, List
+from copy import copy, deepcopy
 
 
 def memento(obj, deep=False):
@@ -26,7 +26,7 @@ class Transaction:
     """
 
     deep = False
-    states = []
+    states: List[Callable[[], None]] = []
 
     def __init__(self, deep, *targets):
         self.deep = deep
@@ -51,6 +51,12 @@ class Transactional:
         self.method = method
 
     def __get__(self, obj, T):
+        """
+        A decorator that makes a function transactional.
+
+        :param method: The function to be decorated.
+        """
+
         def transaction(*args, **kwargs):
             state = memento(obj)
             try:
@@ -67,14 +73,14 @@ class NumObj:
         self.value = value
 
     def __repr__(self):
-        return '<%s: %r>' % (self.__class__.__name__, self.value)
+        return f"<{self.__class__.__name__}: {self.value!r}>"
 
     def increment(self):
         self.value += 1
 
     @Transactional
     def do_stuff(self):
-        self.value = '1111'  # <- invalid value
+        self.value = "1111"  # <- invalid value
         self.increment()  # <- will fail and rollback
 
 
@@ -134,4 +140,5 @@ def main():
 
 if __name__ == "__main__":
     import doctest
+
     doctest.testmod(optionflags=doctest.ELLIPSIS)

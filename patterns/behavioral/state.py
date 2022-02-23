@@ -18,7 +18,7 @@ class State:
         self.pos += 1
         if self.pos == len(self.stations):
             self.pos = 0
-        print("Scanning... Station is {} {}".format(self.stations[self.pos], self.name))
+        print(f"Scanning... Station is {self.stations[self.pos]} {self.name}")
 
 
 class AmState(State):
@@ -83,6 +83,7 @@ def main():
     """
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import doctest
+
     doctest.testmod()
